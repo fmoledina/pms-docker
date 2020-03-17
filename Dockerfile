@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM nvidia/cuda:10.1-base-ubuntu18.04
 
 ARG S6_OVERLAY_VERSION=v1.17.2.0
 ARG DEBIAN_FRONTEND="noninteractive"
@@ -9,12 +9,13 @@ ENTRYPOINT ["/init"]
 RUN \
 # Update and get dependencies
     apt-get update && \
-    apt-get install -y \
+    apt-get install -y --no-install-recommends \
       tzdata \
       curl \
       xmlstarlet \
       uuid-runtime \
       unrar \
+      libnvidia-encode-435 \
     && \
 
 # Fetch and extract S6 overlay
